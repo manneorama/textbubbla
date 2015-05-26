@@ -29,7 +29,6 @@ def calculate_category_name_and_link_number(categories, page_number):
     category_starts = calculate_category_start(len(categories))
     category_start = next(value for value in reversed(category_starts)
                           if value <= page_number)
-    print category_start
     category_index = category_starts.index(category_start)
     return (categories[category_index],
             page_number - category_starts[category_index])
