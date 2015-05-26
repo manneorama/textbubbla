@@ -10,6 +10,7 @@ CATEGORIES_URL = 'http://bubb.la/rss_feeds.json'
 def get_categories():
     cats = requests.get(CATEGORIES_URL).json()
     names = [name for name in cats.iterkeys()]
+    print names
     return names
 
 
@@ -35,7 +36,7 @@ def get_page(page_number):
 
 
 def get_itemized_news(url, limit=None):
-    content = requests.get(url).content
+    content = requests.get(url.replace('Senaste', 'Nyheter')).content
     root = et.fromstring(content)
 
     items = []
@@ -50,7 +51,8 @@ def get_itemized_news(url, limit=None):
 
 
 def get_simple_news(url, limit=None):
-    content = requests.get(url).content
+    print url
+    content = requests.get(url.replace('Senaste', 'Nyheter')).content
     root = et.fromstring(content)
 
     items = []
