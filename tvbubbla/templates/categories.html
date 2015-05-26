@@ -1,0 +1,29 @@
+<div style="float: left; width: 25%; text-align: left">
+    <ul style="list-style-type: none; font-size: 24px">
+        {% for item in left_col %}
+        <li>{{ item.name }}</li>
+        {% endfor %}
+    </ul>
+</div>
+<div style="float: left; width: 25%; text-align: right;">
+    <ul style="list-style-type: none; font-size: 24px">
+        {% for item in left_col %}
+        <li>{{ item.page }}</li>
+        {% endfor %}
+    </ul>
+</div>
+<div style="float: left; width: 25%; text-align: left">
+    <ul style="list-style-type: none; font-size: 24px">
+        {% for item in right_col %}
+        <li>{{ item.name }}</li>
+        {% endfor %}
+    </ul>
+</div>
+<div style="float: left; width: 25%; text-align: right">
+    <ul style="list-style-type: none; font-size: 24px">
+        {% for item in right_col %}
+        <li>{{ item.page }}</li>
+        {% endfor %}
+    </ul>
+</div>
+<div style="clear: both"></div>

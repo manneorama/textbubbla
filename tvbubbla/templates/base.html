@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+        <title>textbubb.la</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='tvbubbla.js') }}"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></script>
+    </head>
+    <body>
+        <div id="div_top_page" class="top_page_container"><span id="pagenum">100</span></div>
+        <div id="div_top_date" class="top_date_container">
+            <span id="cdayname">Fre</span> <span id="cdaynum">01</span> <span id="cmonth">Jun</span>
+            <span id="chour"></span>:<span id="cminute"></span>:<span id="csecond"></span>
+        </div>
+        <div id="div_title" class="title_bar">
+            <div id="div_title_text" class="title_text">TEXTbubb.la <span id="category"></span></div>
+        </div>
+        <div id="div_pad" class="pad"></div>
+        <div id="div_content" class="content">
+            <div id="post_data_placeholder"/>
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+        <div id="div_pad" class="pad"></div>
+        <div id="div_footer" class="footer">
+            <div id="div_footer_news" class="footer_text_container">Nyheter 100</div>
+            <div id="div_footer_content" class="footer_text_container">Innehåll 999</div>
+        </div>
+    </body>
+</html>

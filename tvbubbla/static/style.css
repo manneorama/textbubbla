@@ -1,0 +1,88 @@
+body {
+    background-color: black;
+    font-family: 'VT323';
+    color: white;
+    font-size: 22px;
+}
+
+a {
+    color: yellow;
+}
+
+a#small {
+    color: blue;
+}
+
+.top_page_container {
+    width: 50%;
+    height: 5%;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+.top_date_container {
+    width: 50%;
+    height: 5%;
+    float: left;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+
+.title_bar {
+    clear: both;
+    width: 100%;
+    height: 15%;
+    background-color: blue;
+    margin: 0;
+    padding: 0;
+}
+
+.title_text {
+    letter-spacing: 0.2em;
+    font-size: 3em;
+    margin-left: 0.7em;
+    color: white;
+    padding: 0;
+}
+
+.content {
+    width: 100%;
+    height: 62%;
+    text-align: center;
+    font-size: 48px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.big { font-size: 28px; color: yellow; padding: 8px; }
+.big_align_left { font-size: 28px; color: yellow; padding: 8px; text-align: left;}
+.big_page { font-size: 24px; }
+.small { font-size: 20px; color: blue; padding: 8px; }
+.small_align_left { font-size: 20px; color: blue; padding: 8px; text-align: left;}
+
+.footer {
+    width: 100%;
+    height: 8%;
+    background-color: blue;
+    padding: 0;
+    margin: 0;
+    display: table;
+}
+
+.footer_text_container {
+    width: 50%;
+    float: left;
+    color: yellow;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 32px;
+}
+
+.pad {
+    background-color: yellow;
+    height: 2%;
+    width: 100%;
+}
