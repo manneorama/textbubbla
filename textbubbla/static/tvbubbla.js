@@ -42,7 +42,7 @@ prev_page = function() {
 post_nav = function(pagenum) {
     $.ajax({
         type: 'POST',
-        url: '/navigate',
+        url: $('navigation_url').text(),
         data: JSON.stringify({page: pagenum}),
         success: function(data) { 
             $('#pagenum').text(pagenum);

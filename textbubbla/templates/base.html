@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></script>
     </head>
     <body>
+        <span id="navigation_url" style="display: none">{{ url_for('navigate') }}</span>
         <div id="div_top_page" class="top_page_container"><span id="pagenum">100</span></div>
         <div id="div_top_date" class="top_date_container">
             <span id="cdayname">Fre</span> <span id="cdaynum">01</span> <span id="cmonth">Jun</span>
