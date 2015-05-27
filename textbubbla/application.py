@@ -1,11 +1,10 @@
+# -*- coding: utf8 -*-
 from flask import Flask, render_template, request, jsonify
 
 from news import top_stories, get_categories_as_columns, get_page
 
 app = Flask(__name__)
 
-BASE_URL = 'http://bubb.la/rss/{}'
-CATEGORIES = 'http://bubb.la/rss_feeds.json'
 
 DEFAULT_PAGES = {
     100: {
