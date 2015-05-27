@@ -1,3 +1,4 @@
+# -*- coding: utf8 -*-
 import operator
 
 CATSTART, CATEND = 101, 998

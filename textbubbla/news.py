@@ -1,7 +1,10 @@
+# -*- coding: utf8 -*-
 import requests
 import xml.etree.ElementTree as et
 
+import cache
 from page_handling import calculate_category_name_and_link_number, calculate_category_start
+
 
 BASE_URL = 'http://bubb.la/rss/{}'
 CATEGORIES_URL = 'http://bubb.la/rss_feeds.json'
@@ -29,14 +32,40 @@ def get_page(page_number):
     names = get_categories()
     category_name, item_index = calculate_category_name_and_link_number(
         names, page_number)
-    return get_itemized_news(
-        BASE_URL.format(category_name),
-        limit=item_index)[-1]
+    items = get_itemized_news(
+        category_name)
+    try:
+        return items[item_index]
+    except IndexError:
+        return {
+            'title': 'Denna sida har ingen publicering',
+            'url': '#',
+            'date': 'aldrig',
+            'category': category_name,
+        }
 
 
-def get_itemized_news(url, limit=None):
-    content = requests.get(url.replace('Senaste', 'Nyheter')).content
-    root = et.fromstring(content)
+def get_itemized_news(category):
+    if not itemize_news_for_category(category):
+        return None
+    items = cache.get(category)
+    return items
+
+
+def itemize_news():
+    for category in get_categories():
+        itemize_news_for_category(category)
+
+
+def itemize_news_for_category(category):
+    if not cache.must_repopulate(category):
+        return True
+    url = BASE_URL.format(category).replace('Senaste', 'Nyheter')
+    return cache.populate_from_url(category, url, itemize)
+
+
+def itemize(request_content):
+    root = et.fromstring(request_content)
 
     items = []
     for item in root.iter('item'):
@@ -46,26 +75,18 @@ def get_itemized_news(url, limit=None):
             'category': item.find('category').text,
             'date': item.find('pubDate').text
         })
-    return items if limit is None else items[:limit + 1]
+    return items
 
 
-def get_simple_news(url, limit=None):
-    content = requests.get(url.replace('Senaste', 'Nyheter')).content
-    root = et.fromstring(content)
-
-    items = []
-    for item in root.iter('item'):
-        items.append({
-            'title': item.find('title').text,
-            'category': item.find('category').text,
-            'url': item.find('link').text
-        })
-    return items if limit is None else items[:limit]
+def get_simple_news(limit=None):
+    if itemize_news_for_category('Nyheter'):
+        items = cache.get('Nyheter')
+        return items if limit is None else items[:limit]
 
 
 def top_stories():
     top_stories = {
         'item{}'.format(index + 1): story
-        for index, story in enumerate(get_simple_news(BASE_URL.format('nyheter'), limit=4))
+        for index, story in enumerate(get_simple_news(limit=4))
     }
     return top_stories
