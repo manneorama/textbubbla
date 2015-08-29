@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 from flask import Flask, render_template, request, jsonify
 
-from news import top_stories, get_categories_as_columns, get_page
+from news import top_stories, get_categories_as_columns, get_page, get_excerpt
 
 app = Flask(__name__)
 
@@ -36,6 +36,16 @@ def navigate():
     else:
         item = get_page(request.json['page'])
         return render_template('single_item.html', item=item)
+
+
+@app.route('/excerpt', methods=['POST'])
+def excerpt():
+    if 'page' not in request.json:
+        return jsonify({'error': 'url key not in request data'})
+    if request.json['page'] in DEFAULT_PAGES:
+        return jsonify({})
+    excerpt = get_excerpt(request.json['page'])
+    return jsonify(excerpt)
 
 
 def main_page():

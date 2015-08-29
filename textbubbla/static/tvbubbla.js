@@ -47,6 +47,7 @@ post_nav = function(pagenum) {
         success: function(data) { 
             $('#pagenum').text(pagenum);
             render_data(data); 
+            get_excerpt(pagenum);
         },
         error: function(data) { console.log(data); },
         contentType: "application/json",
@@ -54,8 +55,27 @@ post_nav = function(pagenum) {
     });
 }
 
+get_excerpt = function(pagenum) {
+    console.log('getting excerpt')
+    $.ajax({
+        type: 'POST',
+        url: $('#excerpt_url').text(),
+        data: JSON.stringify({page: pagenum}),
+        success: function(data) {
+            render_excerpt(data);
+        },
+        error: function(data) { console.log(data); },
+        contentType: "application/json",
+        dataType: 'json'
+    });
+}
+
 render_data = function(data) {
     $('#post_data_placeholder').html(data);
+}
+
+render_excerpt = function(data) {
+    $('#excerpt').text(data.excerpt);
 }
 
 // digital clock code

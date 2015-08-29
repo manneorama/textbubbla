@@ -45,6 +45,11 @@ def get_page(page_number):
         }
 
 
+def get_excerpt(page_number):
+    page_url = get_page(page_number)['url']
+    return cache.get_and_save_excerpt(page_url)
+
+
 def get_itemized_news(category):
     if not itemize_news_for_category(category):
         return None
